@@ -1,68 +1,48 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginization } from 'redux/Authorization/operations'; 
+import { Link } from 'react-router-dom';
+import { loginization } from 'redux/Authorization/operations';
 
-const Login = () => {
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const { email, password } = formData;
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleLogin = () => {
     
-    dispatch(loginization(formData));
-
-  
-    setFormData({
-      email: '',
-      password: '',
-    });
+    if (email && password) {
+      const loginData = { email, password };
+      dispatch(loginization(loginData));
+    } else {
+      console.error('Please fill in all fields.');
+    }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+    <section>
+      <div>
+        <h2>Login</h2>
         <div>
-          <label>Email</label>
+          <label>Email:</label>
           <input
             type="email"
-            name="email"
             value={email}
-            onChange={handleChange}
-            required
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div>
-          <label>Password</label>
+          <label>Password:</label>
           <input
             type="password"
-            name="password"
             value={password}
-            onChange={handleChange}
-            required
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div>
-          <button type="submit">Login</button>
-        </div>
-      </form>
-    </div>
+        <button onClick={handleLogin}>Log in</button>
+        <p>
+          Or <Link to="/register">register now</Link>
+        </p>
+      </div>
+    </section>
   );
-};
-
-export default Login;
+}

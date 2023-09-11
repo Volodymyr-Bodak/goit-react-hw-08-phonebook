@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/Authorization/operations';
+import Navigation from './Navigation';
 
 const RegistrationComponent = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const RegistrationComponent = () => {
 
   return (
     <div>
+      <Navigation/>
       <h2>Registration</h2>
       <form onSubmit={handleSubmit}>
         <div>

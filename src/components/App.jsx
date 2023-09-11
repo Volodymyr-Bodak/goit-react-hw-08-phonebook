@@ -1,16 +1,17 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, lazy, startTransition } from 'react';
+import { useEffect, startTransition } from 'react'; // Remove lazy
 import { refreshUser, register } from 'redux/Authorization/operations';
-import { PrivateRoute } from './PrivateRoute';
-import { RestrictedRoute } from './RestrictedRoute';
 import { ToastContainer } from 'react-toastify';
 import RegistrationComponent from './RegistrationComponent';
 import Spinner from './Spinner';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
 
-const Home = lazy(() => import('../components/Home'));
-const Login = lazy(() => import('../components/Login'));
-const Contactlist = lazy(() => import('../components/Contactlist'));
+// Import components directly
+import Home from '../components/Home';
+import Login from '../components/Login';
+import Contactlist from '../components/Contactlist';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const App = () => {
 
   const handleRegistration = async (user) => {
     try {
-      await startTransition(() => { // Use startTransition
+      await startTransition(() => { 
         dispatch(register(user));
       });
     } catch (error) {
@@ -38,24 +39,18 @@ const App = () => {
 
         <Route
           path="/contacts"
-          element={
-            <PrivateRoute component={<Contactlist />} redirectTo="/login" />
-          }
+          element={<PrivateRoute component={<Contactlist />} redirectTo="/login" />}
         />
         <Route
           path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
-          }
+          element={<RestrictedRoute redirectTo="/contacts" component={<Login />} />}
         />
         <Route
           path="/register"
           element={
             <RestrictedRoute
               redirectTo="/contacts"
-              component={
-                <RegistrationComponent onRegister={handleRegistration} />
-              }
+              component={<RegistrationComponent onRegister={handleRegistration} />}
             />
           }
         />
