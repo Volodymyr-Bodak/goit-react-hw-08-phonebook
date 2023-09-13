@@ -8,9 +8,8 @@ import Spinner from './Spinner';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 
-// Import components directly
 import Home from '../components/Home';
-import Login from '../components/Login';
+import Login from './Login/Login';
 import Contactlist from '../components/Contactlist';
 
 const App = () => {
