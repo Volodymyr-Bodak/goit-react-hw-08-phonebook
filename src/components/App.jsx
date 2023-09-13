@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, startTransition } from 'react'; // Remove lazy
 import { refreshUser, register } from 'redux/Authorization/operations';
 import { ToastContainer } from 'react-toastify';
-import RegistrationComponent from './RegistrationComponent';
+import RegistrationComponent from './Registration/RegistrationComponent';
 import Spinner from './Spinner';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
