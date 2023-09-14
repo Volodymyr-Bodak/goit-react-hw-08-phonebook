@@ -8,7 +8,7 @@ import Spinner from './Spinner';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 
-import Home from '../components/Home';
+import Home from 'Home/Home';
 import Login from './Login/Login';
 import Contactlist from '../components/Contactlist';
 
